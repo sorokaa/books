@@ -13,5 +13,36 @@ services:
     volumes:
       - books-db:/var/lib/mysql
 
+  keycloak-db:
+    container_name: books-keycloak-db
+    image: postgres:14.0
+    environment:
+      - POSTGRES_DB=${KEYCLOAK_DATABASE_NAME}
+      - POSTGRES_USER=${KEYCLOAK_DATABASE_USERNAME}
+      - POSTGRES_PASSWORD=${KEYCLOAK_DATABASE_PASSWORD}
+    ports:
+      - "${KEYCLOAK_DATABASE_PORT}:5432"
+    volumes:
+      - books-keycloak-db:/var/lib/postgresql/data
+
+  keycloak:
+    container_name: books-keycloak
+    image: bitnami/keycloak:${KEYCLOAK_VERSION}
+    environment:
+      - KEYCLOAK_ADMIN_USER=${KEYCLOAK_ADMIN_USER}
+      - KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD}
+      - KEYCLOAK_MANAGEMENT_PASSWORD=${KEYCLOAK_MANAGEMENT_PASSWORD}
+      - KEYCLOAK_DATABASE_PORT=${KEYCLOAK_DATABASE_PORT}
+      - KEYCLOAK_DATABASE_HOST=${KEYCLOAK_DATABASE_HOST}
+      - KEYCLOAK_DATABASE_NAME=${KEYCLOAK_DATABASE_NAME}
+      - KEYCLOAK_CREATE_ADMIN_USER='true'
+      - KEYCLOAK_DATABASE_USER=${KEYCLOAK_DATABASE_USERNAME}
+      - KEYCLOAK_DATABASE_PASSWORD=${KEYCLOAK_DATABASE_PASSWORD}
+    ports:
+      - "${KEYCLOAK_PORT}:8080"
+    depends_on:
+      - keycloak-db
+
 volumes:
   books-db:
+  books-keycloak-db:

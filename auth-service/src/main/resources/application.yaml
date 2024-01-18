@@ -1,5 +1,9 @@
 server:
-  port: 8180
+  error:
+    include-message: always
+    include-stacktrace: never
+    include-binding-errors: always
+  port: 8380
 
 spring:
   datasource:
@@ -8,7 +12,7 @@ spring:
     hikari:
       username: ${MYSQL_ROOT_USER}
       password: ${MYSQL_ROOT_PASSWORD}
-      schema: dictionary
+      schema: auth_schema
   liquibase:
     enabled: true
     change-log: db/changelog/db.changelog-master.yaml
@@ -19,12 +23,20 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: validate
+    show-sql: true
   security:
     oauth2:
       resourceserver:
         jwt:
           issuer-uri: ${KEYCLOAK_URL}/realms/${KEYCLOAK_REALM}
           jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+
+keycloak:
+  keycloak-url: ${KEYCLOAK_URL}
+  realm: ${KEYCLOAK_REALM}
+  admin-console:
+    client-id: ${KEYCLOAK_CLIENT_ID}
+    client-secret: ${KEYCLOAK_CLIENT_SECRET}
 
 springdoc:
   default-produces-media-type: application/json

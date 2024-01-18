@@ -1,4 +1,4 @@
-package io.srk.dictionary.configuration.swagger;
+package io.srk.auth.configuration.swagger;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -16,7 +16,7 @@ public class SwaggerConfiguration {
 
     @Bean
     public OpenAPI customOpenAPI(Components components) {
-        Info apiInfo = new Info().title("Dictionary API");
+        Info apiInfo = new Info().title("Auth API");
         return new OpenAPI()
                 .components(components)
                 .info(apiInfo);
