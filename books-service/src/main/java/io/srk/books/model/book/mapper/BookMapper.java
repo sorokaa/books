@@ -7,7 +7,8 @@ import io.srk.books.model.book.dto.BookShortDto;
 import io.srk.books.model.book.entity.Book;
 import io.srk.books.model.book.request.CreateBookRequest;
 import io.srk.books.model.book.request.UpdateBookRequest;
-import io.srk.books.model.publisher.PublisherMapper;
+import io.srk.books.model.publisher.mapper.PublisherMapper;
+import io.srk.books.model.publisher.mapper.ShortPublisherInfo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -26,6 +27,7 @@ import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 public interface BookMapper {
 
     @Mapping(target = "authors", qualifiedBy = ShortAuthorInfo.class)
+    @Mapping(target = "publisher", qualifiedBy = ShortPublisherInfo.class)
     BookDto toDto(Book book);
 
     BookShortDto toShortDto(Book book);

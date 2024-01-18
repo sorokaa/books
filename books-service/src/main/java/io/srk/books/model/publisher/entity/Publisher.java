@@ -3,12 +3,14 @@ package io.srk.books.model.publisher.entity;
 import io.srk.books.model.book.entity.Book;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.experimental.FieldNameConstants;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Entity
+@FieldNameConstants
 @Table(schema = "book_schema", name = "publisher")
 public class Publisher {
 
