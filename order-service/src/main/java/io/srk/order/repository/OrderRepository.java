@@ -1,4 +1,4 @@
-package io.srk.order;
+package io.srk.order.repository;
 
 import io.srk.order.model.Order;
 import org.springframework.data.jpa.repository.JpaRepository;

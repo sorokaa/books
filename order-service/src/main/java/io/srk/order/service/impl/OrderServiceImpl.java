@@ -1,6 +1,6 @@
 package io.srk.order.service.impl;
 
-import io.srk.order.OrderRepository;
+import io.srk.order.repository.OrderRepository;
 import io.srk.order.client.BookServiceClient;
 import io.srk.order.exception.ClientException;
 import io.srk.order.exception.EntityNotFoundException;
@@ -13,6 +13,7 @@ import io.srk.order.model.external.book.BookDto;
 import io.srk.order.model.external.book.BookStatus;
 import io.srk.order.service.OrderService;
 import io.srk.order.util.EntityConstants;
+import io.srk.order.util.security.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -49,7 +50,8 @@ public class OrderServiceImpl implements OrderService {
         order.setBookId(book.getId());
         order.setPrice(book.getPrice());
         order.setStatus(OrderStatus.PLACED);
-        order.setUserId(UUID.randomUUID().toString()); // todo
+        UUID userId = SecurityUtil.getCurrentUserId();
+        order.setUserId(String.valueOf(userId));
         Order saved = orderRepository.save(order);
         return orderMapper.toDto(saved);
     }
