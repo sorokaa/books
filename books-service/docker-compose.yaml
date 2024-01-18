@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+
+  books-db:
+    image: mysql:${MYSQL_VERSION}
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DB}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - '${MYSQL_PORT}:3306'
+    volumes:
+      - books-db:/var/lib/mysql
+
+volumes:
+  books-db:

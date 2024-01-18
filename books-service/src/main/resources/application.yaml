@@ -1,0 +1,29 @@
+server:
+  error:
+    include-message: always
+    include-stacktrace: never
+    include-binding-errors: always
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${spring.datasource.hikari.schema}
+    hikari:
+      username: ${MYSQL_ROOT_USER}
+      password: ${MYSQL_ROOT_PASSWORD}
+      schema: book_schema
+  liquibase:
+    enabled: true
+    change-log: db/changelog/db.changelog-master.yaml
+    default-schema: ${spring.datasource.hikari.schema}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+
+client:
+  dictionary-service-url: ${DICTIONARY_HOST:http://localhost:8180}
