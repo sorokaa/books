@@ -4,7 +4,6 @@ server:
     include-stacktrace: never
     include-binding-errors: always
 
-
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -27,3 +26,6 @@ spring:
 
 client:
   dictionary-service-url: ${DICTIONARY_HOST:http://localhost:8180}
+
+springdoc:
+  default-produces-media-type: application/json

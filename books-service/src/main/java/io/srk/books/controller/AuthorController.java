@@ -6,6 +6,8 @@ import io.srk.books.model.author.request.AuthorFilter;
 import io.srk.books.model.author.request.CreateAuthorRequest;
 import io.srk.books.model.author.request.UpdateAuthorRequest;
 import io.srk.books.service.author.AuthorService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,15 +19,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/authors")
 @RequiredArgsConstructor
+@Tag(name = "Author API")
 public class AuthorController {
 
     private final AuthorService authorService;
 
+    @Operation(summary = "Get all authors")
     @GetMapping
     public List<AuthorShortDto> getAll() {
         return authorService.getAll();
     }
 
+    @Operation(summary = "Get authors by filter")
     @GetMapping("/filter")
     public Page<AuthorShortDto> getByFilter(
             @PageableDefault Pageable pageable,
@@ -34,21 +39,25 @@ public class AuthorController {
         return authorService.getByFilter(filter, pageable);
     }
 
+    @Operation(summary = "Get author by id")
     @GetMapping("/{id}")
     public AuthorDto getById(@PathVariable Long id) {
         return authorService.getById(id);
     }
 
+    @Operation(summary = "Create author")
     @PostMapping
     public AuthorDto create(@RequestBody CreateAuthorRequest request) {
         return authorService.create(request);
     }
 
+    @Operation(summary = "Update author")
     @PutMapping("/{id}")
     public AuthorDto update(@PathVariable Long id, @RequestBody UpdateAuthorRequest request) {
         return authorService.update(id, request);
     }
 
+    @Operation(summary = "Delete author")
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         authorService.delete(id);
