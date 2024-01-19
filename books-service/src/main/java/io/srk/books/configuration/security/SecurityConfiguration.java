@@ -29,7 +29,9 @@ public class SecurityConfiguration {
             "/swagger-ui**",
             "/swagger-ui/**",
             "/v3/api-docs**",
-            "/v3/api-docs/**"
+            "/v3/api-docs/**",
+
+            "/api/books/statistic" // todo remove
     };
 
     @Bean
