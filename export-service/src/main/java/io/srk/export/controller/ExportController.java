@@ -5,6 +5,7 @@ import io.srk.export.service.ExportService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/export")
 @RequiredArgsConstructor
@@ -30,6 +32,7 @@ public class ExportController {
     public Page<ExportRequestDataDto> getAll(
             @ParameterObject @PageableDefault Pageable pageable
     ) {
+        log.debug("API request to get all exports");
         return exportService.getAll(pageable);
     }
 }

@@ -2,7 +2,7 @@ package io.srk.export.schedule;
 
 import io.srk.export.exception.ExportProcessingException;
 import io.srk.export.exception.ServerInternalException;
-import io.srk.export.helper.ExportHelperFacade;
+import io.srk.export.helper.impl.ExportHelperFacade;
 import io.srk.export.model.export.dto.ExportRequestDto;
 import io.srk.export.model.export.entity.ExportRequest;
 import io.srk.export.model.export.enumeration.ExportStatus;

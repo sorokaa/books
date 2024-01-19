@@ -10,7 +10,7 @@ spring:
       password: ${MYSQL_ROOT_PASSWORD}
       schema: export_schema
   liquibase:
-    enabled: false
+    enabled: true
     change-log: db/changelog/db.changelog-master.yaml
     default-schema: ${spring.datasource.hikari.schema}
   jpa:

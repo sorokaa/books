@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2024-01-20-01
+      author: Soroka
+      changes:
+
+        - createTable:
+            tableName: export_request
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: failure_reason
+                  type: varchar(255)
+              - column:
+                  name: type
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: data
+                  type: json
+              - column:
+                  name: file_id
+                  type: bigint
+              - column:
+                  name: created
+                  type: timestamp
+                  defaultValueComputed: now()
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated
+                  type: timestamp
