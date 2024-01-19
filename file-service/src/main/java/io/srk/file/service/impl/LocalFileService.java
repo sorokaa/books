@@ -3,6 +3,7 @@ package io.srk.file.service.impl;
 import io.srk.file.exception.EntityNotFoundException;
 import io.srk.file.exception.ServerInternalException;
 import io.srk.file.model.dto.FileDto;
+import io.srk.file.model.dto.FileResponse;
 import io.srk.file.model.entity.FileEntity;
 import io.srk.file.model.mapper.FileMapper;
 import io.srk.file.repository.FileRepository;
@@ -34,18 +35,20 @@ public class LocalFileService implements FileService {
     private final FileMapper fileMapper;
 
     @Override
-    public byte[] getFileById(Long id) {
+    public FileResponse getFileById(Long id) {
         FileEntity entity = getEntity(id);
         String fileLocation = entity.getFullPath();
         Path path = Paths.get(fileLocation);
         if (!Files.exists(path)) {
             throw new EntityNotFoundException(EntityConstants.FILE, id);
         }
+        FileResponse fileResponse = fileMapper.toResponse(entity);
         try {
-            return Files.readAllBytes(path);
+            fileResponse.setContent(Files.readAllBytes(path));
         } catch (IOException e) {
             throw new ServerInternalException();
         }
+        return fileResponse;
     }
 
     @Override
