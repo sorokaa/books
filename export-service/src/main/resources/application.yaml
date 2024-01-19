@@ -1,0 +1,37 @@
+server:
+  port: 8480
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${spring.datasource.hikari.schema}
+    hikari:
+      username: ${MYSQL_ROOT_USER}
+      password: ${MYSQL_ROOT_PASSWORD}
+      schema: export_schema
+  liquibase:
+    enabled: false
+    change-log: db/changelog/db.changelog-master.yaml
+    default-schema: ${spring.datasource.hikari.schema}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVER}
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_URL}/realms/${KEYCLOAK_REALM}
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+
+client:
+  book-service-url: ${BOOK_SERVICE_URL:http://localhost:8080}
+  file-service-url: ${FILE_SERVICE_URL:http://localhost:8580}
+
+export:
+  delay: 10 #In seconds

@@ -17,8 +17,7 @@ import io.srk.order.util.security.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -80,6 +79,17 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.findAllByUserId(String.valueOf(userId)).stream()
                 .map(orderMapper::toDto)
                 .toList();
+    }
+
+    @Override
+    public Map<String, Long> getBooksOrdersCount(Set<Long> bookIds) {
+        // Think how to make it with one query (maybe JdbcTemplate?)
+        Map<String, Long> result = new HashMap<>();
+        for (Long bookId : bookIds) {
+            Long count = orderRepository.countByBookId(bookId);
+            result.put(String.valueOf(bookId), count);
+        }
+        return result;
     }
 
     private Order getEntity(Long id) {

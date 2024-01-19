@@ -10,6 +10,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -66,5 +68,11 @@ public class OrderController {
     @DeleteMapping("/{bookId}/by-book")
     public void deleteByBook(@PathVariable Long bookId) {
         orderService.deleteByBook(bookId);
+    }
+
+    @Operation(summary = "Get books orders count")
+    @GetMapping("/count")
+    public Map<String, Long> getBooksOrdersCount(@RequestParam("bookIds") Set<Long> bookIds) {
+        return orderService.getBooksOrdersCount(bookIds);
     }
 }

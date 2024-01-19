@@ -4,6 +4,8 @@ import io.srk.order.model.OrderDto;
 import io.srk.order.model.OrderStatus;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public interface OrderService {
     
@@ -20,4 +22,6 @@ public interface OrderService {
     OrderDto updateStatus(Long id, OrderStatus status);
 
     List<OrderDto> getCurrentUserOrders();
+
+    Map<String, Long> getBooksOrdersCount(Set<Long> bookIds);
 }

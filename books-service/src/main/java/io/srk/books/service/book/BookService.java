@@ -23,4 +23,6 @@ public interface BookService {
     BookDto update(Long id, UpdateBookRequest request);
 
     void delete(Long id);
+
+    void exportStatistic();
 }

@@ -9,6 +9,9 @@ import io.srk.books.model.book.request.AssignBookEntitiesRequest;
 import io.srk.books.model.book.request.BookFilter;
 import io.srk.books.model.book.request.CreateBookRequest;
 import io.srk.books.model.book.request.UpdateBookRequest;
+import io.srk.books.model.export.enumeration.ExportType;
+import io.srk.books.model.export.request.ExportRequest;
+import io.srk.books.producer.ExportRequestProducer;
 import io.srk.books.repository.book.BookRepository;
 import io.srk.books.repository.book.specification.BookSpecification;
 import io.srk.books.service.author.AuthorService;
@@ -35,6 +38,7 @@ public class BookServiceImpl implements BookService {
     private final BookValidator bookValidator;
     private final AuthorService authorService;
     private final PublisherService publisherService;
+    private final ExportRequestProducer exportRequestProducer;
 
     @Override
     @Transactional(readOnly = true)
@@ -82,6 +86,13 @@ public class BookServiceImpl implements BookService {
     @Transactional
     public void delete(Long id) {
         bookRepository.deleteById(id);
+    }
+
+    @Override
+    public void exportStatistic() {
+        ExportRequest request = new ExportRequest();
+        request.setType(ExportType.BOOK_SELL_STATISTIC);
+        exportRequestProducer.sendRequest(request);
     }
 
     private Book getEntity(Long id) {

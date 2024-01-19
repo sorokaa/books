@@ -1,6 +1,6 @@
 package io.srk.books.validator.book;
 
-import io.srk.books.client.DictionaryClient;
+import io.srk.books.client.DictionaryServiceClient;
 import io.srk.books.exception.EntityNotFoundException;
 import io.srk.books.model.book.request.CreateBookRequest;
 import io.srk.books.model.book.request.UpdateBookRequest;
@@ -16,7 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookValidator {
 
-    private final DictionaryClient dictionaryClient;
+    private final DictionaryServiceClient dictionaryClient;
     private final PublisherService publisherService;
     private final AuthorService authorService;
 

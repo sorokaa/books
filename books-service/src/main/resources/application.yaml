@@ -29,9 +29,13 @@ spring:
         jwt:
           issuer-uri: ${KEYCLOAK_URL}/realms/${KEYCLOAK_REALM}
           jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVER}
+
 
 client:
   dictionary-service-url: ${DICTIONARY_HOST:http://localhost:8180}
+  order-service-url: ${ORDER_SERVICE_URL:http://localhost:8280}
 
 springdoc:
   default-produces-media-type: application/json

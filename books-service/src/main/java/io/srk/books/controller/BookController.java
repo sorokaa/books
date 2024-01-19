@@ -2,9 +2,11 @@ package io.srk.books.controller;
 
 import io.srk.books.model.book.dto.BookDto;
 import io.srk.books.model.book.dto.BookShortDto;
+import io.srk.books.model.book.dto.BookStatisticDto;
 import io.srk.books.model.book.request.BookFilter;
 import io.srk.books.model.book.request.CreateBookRequest;
 import io.srk.books.model.book.request.UpdateBookRequest;
+import io.srk.books.service.statistic.BookStatisticService;
 import io.srk.books.service.book.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -27,6 +29,7 @@ import java.util.List;
 public class BookController {
 
     private final BookService bookService;
+    private final BookStatisticService bookStatisticService;
 
     @Operation(summary = "Get all books")
     @PreAuthorize("hasAnyAuthority(@authorities.ROLE_ADMIN, @authorities.ROLE_CLIENT)")
@@ -71,5 +74,17 @@ public class BookController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         bookService.delete(id);
+    }
+
+    @Operation(summary = "Export books statistic")
+    @PostMapping("/statistic/export")
+    public void exportStatistic() {
+        bookService.exportStatistic();
+    }
+
+    @Operation(summary = "Get books statistic")
+    @GetMapping("/statistic")
+    public List<BookStatisticDto> getStatistic() {
+        return bookStatisticService.getStatistic();
     }
 }

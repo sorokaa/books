@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name = "dictionary-client", url = "${client.dictionary-service-url}/api/dictionaries")
-public interface DictionaryClient {
+public interface DictionaryServiceClient {
 
     @GetMapping("/languages/{id}/exists")
     boolean isLanguageExist(@PathVariable Long id);
