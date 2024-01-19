@@ -8,4 +8,8 @@ import java.util.UUID;
 public interface SecurityService {
 
     UUID createUser(CreateUserExternalRequest request, UserRole role);
+
+    void blockUser(UUID id);
+
+    void unblockUser(UUID id);
 }

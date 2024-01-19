@@ -8,7 +8,9 @@ import jakarta.ws.rs.core.Response;
 import lombok.RequiredArgsConstructor;
 import org.keycloak.admin.client.CreatedResponseUtil;
 import org.keycloak.admin.client.resource.RealmResource;
+import org.keycloak.admin.client.resource.UserResource;
 import org.keycloak.representations.idm.CredentialRepresentation;
+import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,6 +32,22 @@ public class KeycloakSecurityService implements SecurityService {
         Response response = realm.users().create(userRepresentation);
         String userId = CreatedResponseUtil.getCreatedId(response);
         return UUID.fromString(userId);
+    }
+
+    @Override
+    public void blockUser(UUID id) {
+        UserResource userResource = realm.users().get(id.toString());
+        UserRepresentation representation = userResource.toRepresentation();
+        representation.setEnabled(false);
+        userResource.update(representation);
+    }
+
+    @Override
+    public void unblockUser(UUID id) {
+        UserResource userResource = realm.users().get(id.toString());
+        UserRepresentation representation = userResource.toRepresentation();
+        representation.setEnabled(true);
+        userResource.update(representation);
     }
 
     private CredentialRepresentation createCredentials(String password) {

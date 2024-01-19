@@ -1,8 +1,7 @@
 package io.srk.auth.model.auth.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import io.srk.auth.model.auth.enumeration.UserStatus;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.UUID;
@@ -17,7 +16,15 @@ public class User {
 
     private String username;
 
+    private String firstName;
+
+    private String lastName;
+
     private String email;
+
+    @Column(columnDefinition = "varchar(255)")
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
 
     public UUID getId() {
         return UUID.fromString(id);

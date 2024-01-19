@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2024-01-19-02
+      author: Soroka
+      changes:
+
+        - addColumn:
+            tableName: user
+            columns:
+              - column:
+                  name: status
+                  type: varchar(255)

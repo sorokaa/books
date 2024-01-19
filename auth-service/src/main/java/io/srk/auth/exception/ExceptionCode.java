@@ -6,7 +6,8 @@ import lombok.AllArgsConstructor;
 public enum ExceptionCode {
 
     ENTITY_DOES_NOT_EXIST("Entity %s does not exist by id %s"),
-    USER_ALREADY_EXIST("User already exist");
+    USER_ALREADY_EXIST("User already exist"),
+    USER_WRONG_STATUS("User has wrong status, must be %s");
 
     private final String value;
 
