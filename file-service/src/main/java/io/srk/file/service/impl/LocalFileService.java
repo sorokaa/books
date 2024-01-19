@@ -10,6 +10,7 @@ import io.srk.file.repository.FileRepository;
 import io.srk.file.service.FileService;
 import io.srk.file.util.EntityConstants;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class LocalFileService implements FileService {
@@ -46,6 +48,7 @@ public class LocalFileService implements FileService {
         try {
             fileResponse.setContent(Files.readAllBytes(path));
         } catch (IOException e) {
+            log.error("Error occurred while setting file content. Message: {}", e.getMessage());
             throw new ServerInternalException();
         }
         return fileResponse;
