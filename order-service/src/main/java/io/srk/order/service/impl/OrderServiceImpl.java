@@ -1,6 +1,5 @@
 package io.srk.order.service.impl;
 
-import io.srk.order.repository.OrderRepository;
 import io.srk.order.client.BookServiceClient;
 import io.srk.order.exception.ClientException;
 import io.srk.order.exception.EntityNotFoundException;
@@ -11,6 +10,7 @@ import io.srk.order.model.OrderMapper;
 import io.srk.order.model.OrderStatus;
 import io.srk.order.model.external.book.BookDto;
 import io.srk.order.model.external.book.BookStatus;
+import io.srk.order.repository.OrderRepository;
 import io.srk.order.service.OrderService;
 import io.srk.order.util.EntityConstants;
 import io.srk.order.util.security.SecurityUtil;
@@ -72,6 +72,14 @@ public class OrderServiceImpl implements OrderService {
         order.setStatus(status);
         Order saved = orderRepository.save(order);
         return orderMapper.toDto(saved);
+    }
+
+    @Override
+    public List<OrderDto> getCurrentUserOrders() {
+        UUID userId = SecurityUtil.getCurrentUserId();
+        return orderRepository.findAllByUserId(String.valueOf(userId)).stream()
+                .map(orderMapper::toDto)
+                .toList();
     }
 
     private Order getEntity(Long id) {

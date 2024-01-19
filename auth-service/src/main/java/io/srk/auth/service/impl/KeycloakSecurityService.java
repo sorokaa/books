@@ -1,7 +1,8 @@
 package io.srk.auth.service.impl;
 
-import io.srk.auth.model.security.request.CreateUserExternalRequest;
+import io.srk.auth.model.auth.enumeration.UserRole;
 import io.srk.auth.model.keycloak.mapper.KeycloakMapper;
+import io.srk.auth.model.security.request.CreateUserExternalRequest;
 import io.srk.auth.service.SecurityService;
 import jakarta.ws.rs.core.Response;
 import lombok.RequiredArgsConstructor;
@@ -21,10 +22,11 @@ public class KeycloakSecurityService implements SecurityService {
     private final KeycloakMapper mapper;
 
     @Override
-    public UUID createUser(CreateUserExternalRequest request) {
+    public UUID createUser(CreateUserExternalRequest request, UserRole role) {
         var userRepresentation = mapper.toUserRepresentation(request);
         userRepresentation.setCredentials(List.of(createCredentials(request.getPassword())));
         userRepresentation.setEnabled(true);
+        userRepresentation.setGroups(List.of(role.getGroup()));
         Response response = realm.users().create(userRepresentation);
         String userId = CreatedResponseUtil.getCreatedId(response);
         return UUID.fromString(userId);

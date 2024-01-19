@@ -1,5 +1,6 @@
 package io.srk.auth.controller;
 
+import io.srk.auth.model.auth.enumeration.UserRole;
 import io.srk.auth.model.auth.request.CreateUserRequest;
 import io.srk.auth.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,16 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/auth/client")
 @RequiredArgsConstructor
-@Tag(name = "Auth API")
-public class AuthController {
+@Tag(name = "Client Auth API")
+public class ClientAuthController {
 
     private final AuthService authService;
 
     @Operation(summary = "Create user")
     @PostMapping
     public void create(@RequestBody CreateUserRequest request) {
-        authService.create(request);
+        authService.create(request, UserRole.CLIENT);
     }
 }

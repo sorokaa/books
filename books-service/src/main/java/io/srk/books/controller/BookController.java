@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,12 +29,14 @@ public class BookController {
     private final BookService bookService;
 
     @Operation(summary = "Get all books")
+    @PreAuthorize("hasAnyAuthority(@authorities.ROLE_ADMIN, @authorities.ROLE_CLIENT)")
     @GetMapping
     public List<BookShortDto> getAll() {
         return bookService.getAll();
     }
 
     @Operation(summary = "Get books by filter")
+    @PreAuthorize("hasAnyAuthority(@authorities.ROLE_ADMIN, @authorities.ROLE_CLIENT)")
     @PostMapping("/filter")
     public Page<BookShortDto> getByFilter(
             @PageableDefault Pageable pageable,
@@ -43,24 +46,28 @@ public class BookController {
     }
 
     @Operation(summary = "Get book by id")
+    @PreAuthorize("hasAnyAuthority(@authorities.ROLE_ADMIN, @authorities.ROLE_CLIENT)")
     @GetMapping("/{id}")
     public BookDto getById(@PathVariable Long id) {
         return bookService.getById(id);
     }
 
     @Operation(summary = "Create book")
+    @PreAuthorize("hasAuthority(@authorities.ROLE_ADMIN)")
     @PostMapping
     public BookDto create(@Valid @RequestBody CreateBookRequest request) {
         return bookService.create(request);
     }
 
     @Operation(summary = "Update book")
+    @PreAuthorize("hasAuthority(@authorities.ROLE_ADMIN)")
     @PutMapping("/{id}")
     public BookDto update(@PathVariable Long id, @RequestBody UpdateBookRequest request) {
         return bookService.update(id, request);
     }
 
     @Operation(summary = "Delete book")
+    @PreAuthorize("hasAuthority(@authorities.ROLE_ADMIN)")
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         bookService.delete(id);

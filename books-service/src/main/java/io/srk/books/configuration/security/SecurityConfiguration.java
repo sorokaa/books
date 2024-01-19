@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,6 +21,7 @@ import java.util.stream.Stream;
 
 @Profile("!test")
 @Configuration
+@EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfiguration {
 
@@ -63,5 +65,10 @@ public class SecurityConfiguration {
             return Stream.concat(authorities.stream(), roles.stream()).toList();
         });
         return jwtAuthenticationConverter;
+    }
+
+    @Bean
+    public Authorities authorities() {
+        return new Authorities();
     }
 }

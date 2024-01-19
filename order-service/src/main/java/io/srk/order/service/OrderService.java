@@ -18,4 +18,6 @@ public interface OrderService {
     void deleteByBook(Long bookId);
 
     OrderDto updateStatus(Long id, OrderStatus status);
+
+    List<OrderDto> getCurrentUserOrders();
 }
