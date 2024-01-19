@@ -35,6 +35,7 @@ public class AdminAuthController {
     @Operation(summary = "Get users")
     @GetMapping
     public List<UserDto> getUsers() {
+        log.debug("API request to get all users");
         return authService.getUsers();
     }
 
