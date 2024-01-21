@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +35,13 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public boolean existsById(Long id) {
         return categoryRepository.existsById(id);
+    }
+
+    @Override
+    public List<CategoryDto> getByIds(Set<Long> ids) {
+        return categoryRepository.findAllById(ids).stream()
+                .map(categoryMapper::toDto)
+                .toList();
     }
 
     private Category getEntity(Long id) {
