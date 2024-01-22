@@ -35,6 +35,8 @@ public class Book {
 
     private String description;
 
+    private Long pictureId;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Publisher publisher;
 

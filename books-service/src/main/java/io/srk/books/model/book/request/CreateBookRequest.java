@@ -40,6 +40,10 @@ public class CreateBookRequest extends AssignBookEntitiesRequest {
     @Schema(description = "Book description")
     private String description;
 
+    @Schema(description = "Book image")
+    @NotNull(message = "Book picture cannot be null")
+    private Long pictureId;
+
     @Schema(description = "Book language dictionary id")
     @NotNull(message = "Language cannot be null")
     private Long languageId;

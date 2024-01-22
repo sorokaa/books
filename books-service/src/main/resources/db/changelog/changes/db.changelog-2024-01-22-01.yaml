@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2024-01-22-01
+      author: Soroka
+      changes:
+        - addColumn:
+            tableName: book
+            columns:
+              - column:
+                  name: picture_id
+                  type: bigint
+                  constraints:
+                    nullable: false

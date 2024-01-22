@@ -5,6 +5,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.security.SecureRandom;
+import java.util.List;
 
 @Data
 @Schema(description = "Book short information")
@@ -21,4 +23,8 @@ public class BookShortDto {
 
     @Schema(description = "Book description")
     private BookStatus status;
+
+    @Schema(description = "Book picture id")
+    private Long pictureId;
+
 }

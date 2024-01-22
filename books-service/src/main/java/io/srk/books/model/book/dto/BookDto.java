@@ -31,4 +31,7 @@ public class BookDto extends BookShortDto {
 
     @Schema(description = "Book categories")
     private List<Long> categoryIds = new ArrayList<>();
+
+    private String description;
+
 }
