@@ -7,11 +7,12 @@ import {Page} from "../models/page.model";
 import {BookFilter} from "../models/filter/book-filter.model";
 import {Author} from "../models/author.model";
 import {Publisher} from "../models/publisher.model";
+import {environments} from "../../../../environments/environments";
 
 @Injectable()
 export class BookService {
 
-  baseUri: string = "http://localhost:8080"
+  private baseUri = environments.bookServerUri
 
   constructor(private http: HttpClient) {
 
@@ -25,7 +26,7 @@ export class BookService {
   }
 
   getBookById(id: number): Observable<Book> {
-    return this.http.get<Book>("http://localhost:8080/api/books/" + id);
+    return this.http.get<Book>(`${this.baseUri}/api/books/${id}`);
   }
 
   getAllAuthors(): Observable<Author[]> {

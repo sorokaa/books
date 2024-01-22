@@ -3,7 +3,7 @@
     <div class="book-head">
       <div class="book-picture">
         <img
-          [style.content]="'url(' + book?.bookUrl + ')'"
+          [style.content]="'url(' + getFileUrl() + ')'"
           [alt]="book?.name"/>
       </div>
       <div class="book-characteristics">

@@ -3,6 +3,7 @@ import {BookDetailsComponent} from "./book-details.component";
 import {NgForOf} from "@angular/common";
 import {DictionaryService} from "../../services/dictionary.service";
 import {BookStatusPipe} from "../../pipes/book-status.pipe";
+import {FileService} from "../../services/file.service";
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import {BookStatusPipe} from "../../pipes/book-status.pipe";
     NgForOf
   ],
   providers: [
-    DictionaryService
+    DictionaryService,
+    FileService
   ],
   exports: [
     BookDetailsComponent

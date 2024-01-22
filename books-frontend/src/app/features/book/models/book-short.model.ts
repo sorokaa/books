@@ -3,5 +3,5 @@ export interface BookShort {
   name: string,
   price: number,
   status: string,
-  bookUrl: string
+  pictureId: number
 }

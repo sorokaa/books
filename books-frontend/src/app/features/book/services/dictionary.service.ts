@@ -3,13 +3,14 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Language} from "../models/language.model";
 import {Category} from "../models/category.model";
+import {environments} from "../../../../environments/environments";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DictionaryService {
 
-  private baseUri: string = "http://localhost:8180"
+  private baseUri = environments.dictionaryServerUri
 
   constructor(private http: HttpClient) {
   }

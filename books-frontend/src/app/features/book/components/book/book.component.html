@@ -1,7 +1,7 @@
 <div class="book">
   <div class="book-image">
     <img [routerLink]="'/books/' + book?.id"
-         [style.content]="'url(' + book?.bookUrl + ')'"
+         [style.content]="'url(' + getFileUrl() + ')'"
          [alt]="book?.name"/>
   </div>
   <span class="book-name" [textContent]="book?.name" [routerLink]="'/books/' + book?.id"></span>

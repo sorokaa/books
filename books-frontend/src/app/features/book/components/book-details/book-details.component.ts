@@ -1,10 +1,11 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {Book} from "../../models/book.model";
 import {BookService} from "../../services/book.service";
 import {ActivatedRoute} from "@angular/router";
 import {Category} from "../../models/category.model";
 import {Language} from "../../models/language.model";
 import {DictionaryService} from "../../services/dictionary.service";
+import {FileService} from "../../services/file.service";
 
 @Component({
   selector: 'book-details',
@@ -19,7 +20,8 @@ export class BookDetailsComponent {
 
   constructor(private bookService: BookService,
               private route: ActivatedRoute,
-              private dictionaryService: DictionaryService) {
+              private dictionaryService: DictionaryService,
+              private fileService: FileService) {
     this.route.params.subscribe(
       params => this.initBook(params['id'])
     )
@@ -41,5 +43,9 @@ export class BookDetailsComponent {
     this.dictionaryService.getCategoriesByIds(book.categoryIds).subscribe(
       next => this.categories = next
     )
+  }
+
+  getFileUrl() {
+    return this.fileService.getFileUrl(this.book?.pictureId)
   }
 }
