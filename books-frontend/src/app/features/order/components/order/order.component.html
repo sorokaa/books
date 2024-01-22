@@ -1,0 +1,15 @@
+<div class="order">
+  <div class="order-metadata">
+    <span [textContent]="'№ ' + order?.id"></span>
+    <span class="order-data">{{ order?.created | date: 'dd MMMM yyyy hh:mm' }}</span>
+    <span class="order-status" [class]="order?.status">{{ order?.status | orderStatusPipe }}</span>
+  </div>
+  <div class="order-info">
+    <span [routerLink]="'/books/' + book?.id"
+          [textContent]="book?.name"></span>
+  </div>
+  <div class="price">
+    <span class="total-price">Total: </span>
+    <span [textContent]="order?.price + ' ₴'"></span>
+  </div>
+</div>

@@ -1,0 +1,132 @@
+.book-content {
+  display: flex;
+  flex-direction: row;
+  margin: 20px 100px 0 100px;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.book-data {
+  display: flex;
+  flex-direction: column;
+}
+
+.book-head {
+  display: flex;
+  flex-direction: row;
+}
+
+.book-picture {
+  width: 500px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.book-picture img {
+  border: none;
+  background-size: cover;
+  background-position: center;
+  width: auto;
+  height: 500px;
+}
+
+.book-name {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.book-characteristics {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.characteristic {
+  padding-top: 10px;
+  font-size: 17px;
+}
+
+.name {
+  margin: 0 16px 12px 0;
+}
+
+.value {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 10px 12px 9px;
+  width: auto;
+  height: auto;
+  background: #F2F3F6;
+  border-color: #F2F3F6;
+  color: #222;
+  border-radius: 8px;
+}
+
+.value-multiple ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  gap: 10px;
+  list-style-type: none;
+  padding: 0;
+}
+
+.order {
+  display: flex;
+  flex-direction: column;
+  min-width: 20%;
+  row-gap: 10px;
+}
+
+.book-price {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.order-button {
+  align-items: center;
+  background-color: #176B87;
+  box-shadow: 0 0 5px rgba(134, 182, 246, 0.5);
+  border: none;
+  color: white;
+  border-radius: .25rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 17px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 1rem;
+  padding: calc(.500rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+  height: 50px;
+}
+
+.order-button:hover {
+  cursor: pointer;
+  background-color: #86B6F6;
+  box-shadow: 0 0 15px rgba(134, 182, 246, 0.5);
+  border: none;
+  transition: 0.5s;
+  transform: translateY(-1px);
+}
+
+.order-button:disabled {
+  background: #afafaf;
+  color: #696969;
+  box-shadow: none;
+  transform: none;
+}

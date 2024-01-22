@@ -1,0 +1,94 @@
+<div class="book-filter">
+  <p>Find books</p>
+  <form [formGroup]="filterForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="filters">
+      <div class="filter-entry">
+        <input id="name-filter" type="text" placeholder="Name" formControlName="name">
+      </div>
+      <div class="filter-entry" formGroupName="priceRange">
+        <label for="price-filter-from">Price: </label>
+        <div class="multiple-inputs">
+          <input id="price-filter-from" type="text" placeholder="From" formControlName="minValue">
+          -
+          <input id="price-filter-to" type="text" placeholder="To" formControlName="maxValue">
+        </div>
+      </div>
+      <div class="filter-entry" formGroupName="yearRange">
+        <label for="year-filter-from">Year: </label>
+        <div class="multiple-inputs">
+          <input id="year-filter-from" type="text" placeholder="From" formControlName="minValue">
+          -
+          <input id="year-filter-to" type="text" placeholder="To" formControlName="maxValue">
+        </div>
+      </div>
+      <div class="filter-entry" formGroupName="pagesRange">
+        <label for="pages-filter-from">Pages: </label>
+        <div class="multiple-inputs">
+          <input id="pages-filter-from" type="text" placeholder="From" formControlName="minValue">
+          -
+          <input id="pages-filter-to" type="text" placeholder="To" formControlName="maxValue">
+        </div>
+      </div>
+      <div class="filter-entry">
+        <label for="publishers-filter">Publishers: </label>
+        <input id="publishers-filter"
+               placeholder="Find publisher"
+               (input)="filterPublishers($event)">
+        <div class="checkbox" *ngFor="let publisher of filteredPublishers">
+          <input type="checkbox"
+                 [id]="publisher.id"
+                 [value]="publisher.id"
+                 (change)="onCheckboxChange($event, 'publisherIds')">
+          <label [for]="publisher.id" [textContent]="publisher.name"></label>
+        </div>
+      </div>
+      <div class="filter-entry">
+        <label for="category-filter">Categories:</label>
+        <input id="category-filter"
+               placeholder="Find category"
+               (input)="filterCategories($event)">
+        <div class="checkbox" *ngFor="let category of filteredCategories">
+          <input type="checkbox"
+                 [id]="category.id"
+                 [value]="category.id"
+                 (change)="onCheckboxChange($event, 'categoryIds')">
+          <label [for]="category.id" [textContent]="category.value"></label>
+        </div>
+      </div>
+      <div class="filter-entry">
+        <label for="language-filter">Languages:</label>
+        <input id="language-filter"
+               placeholder="Find language"
+               (input)="filterLanguages($event)">
+        <div class="checkbox" *ngFor="let language of filteredLanguages">
+          <input type="checkbox"
+                 [id]="language.id"
+                 [value]="language.id"
+                 (change)="onCheckboxChange($event, 'languageIds')">
+          <label [for]="language.id" [textContent]="language.value"></label>
+        </div>
+      </div>
+      <div class="filter-entry">
+        <label for="authors-filter">Authors: </label>
+        <input id="authors-filter"
+               placeholder="Find authors"
+               (input)="filterAuthors($event)">
+        <div class="checkbox" *ngFor="let author of filteredAuthors">
+          <input type="checkbox"
+                 [id]="author.id"
+                 [value]="author.id"
+                 (change)="onCheckboxChange($event, 'authorIds')">
+          <label [for]="author.id" [textContent]="author.name"></label>
+        </div>
+      </div>
+
+      <div class="filter-entry">
+
+      </div>
+
+      <div class="apply-filter">
+        <button type="submit">Apply</button>
+      </div>
+    </div>
+  </form>
+</div>

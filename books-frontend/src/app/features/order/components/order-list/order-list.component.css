@@ -1,0 +1,11 @@
+.orders {
+  display: flex;
+  flex-direction: column;
+}
+
+.orders-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px 20% 0 20%;
+}

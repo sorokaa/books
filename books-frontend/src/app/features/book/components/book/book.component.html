@@ -1,0 +1,12 @@
+<div class="book">
+  <div class="book-image">
+    <img [routerLink]="'/books/' + book?.id"
+         [style.content]="'url(' + book?.bookUrl + ')'"
+         [alt]="book?.name"/>
+  </div>
+  <span class="book-name" [textContent]="book?.name" [routerLink]="'/books/' + book?.id"></span>
+  <div class="book-details">
+    <span class="book-price" [textContent]="book?.price + ' ₴'"></span>
+    <input class="order-button" type="button" value="Order">
+  </div>
+</div>

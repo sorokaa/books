@@ -1,0 +1,21 @@
+<div class="book-page">
+  <book-filter></book-filter>
+  <div class="books-content">
+    <div class="books-data">
+      <span [textContent]="'Found ' + books?.totalElements + ' books'"></span>
+      <div class="pageable">
+        <span>Books in page:</span>
+        <ul>
+          <li class="page-size" [ngClass]="{'active': getPageSize() === 10}" (click)="selectPageSize(10)">10</li>
+          <li class="page-size" [ngClass]="{'active': getPageSize() === 20}" (click)="selectPageSize(20)">20</li>
+          <li class="page-size" [ngClass]="{'active': getPageSize() === 50}" (click)="selectPageSize(50)">50</li>
+        </ul>
+      </div>
+    </div>
+    <div class="books">
+      <book [book]="book" *ngFor="let book of booksList"></book>
+    </div>
+    <button class="load-more"
+            [disabled]="books?.last" (click)="loadMore()">Load more</button>
+  </div>
+</div>

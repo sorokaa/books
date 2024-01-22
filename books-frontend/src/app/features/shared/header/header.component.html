@@ -1,0 +1,12 @@
+<header>
+  <div class="logo" [routerLink]="'/'">
+    BOOks
+  </div>
+  <nav class="navigation">
+    <ul>
+      <li [routerLink]="'/books'">Books</li>
+      <li [routerLink]="'/orders'">My orders</li>
+      <li (click)="onLogout()">Log out</li>
+    </ul>
+  </nav>
+</header>

@@ -1,0 +1,60 @@
+<div class="book-content">
+  <div class="book-data">
+    <div class="book-head">
+      <div class="book-picture">
+        <img
+          [style.content]="'url(' + book?.bookUrl + ')'"
+          [alt]="book?.name"/>
+      </div>
+      <div class="book-characteristics">
+        <p class="book-name" [textContent]="book?.name"></p>
+        <div class="authors">
+          by <span class="authors" [textContent]="author.name" *ngFor="let author of book?.authors"></span>
+        </div>
+        <div class="characteristic">
+          <div class="name">
+            Language
+          </div>
+          <div class="value">
+            <span [textContent]="language?.value"></span>
+          </div>
+        </div>
+        <div class="characteristic">
+          <div class="name">
+            Categories
+          </div>
+          <div class="value-multiple">
+            <ul>
+              <li class="value" [textContent]="category?.value" *ngFor="let category of categories"></li>
+            </ul>
+            <span></span>
+          </div>
+        </div>
+        <div class="characteristic">
+          <div class="name">
+            Pages
+          </div>
+          <span class="value" [textContent]="book?.pages"></span>
+        </div>
+        <div class="characteristic">
+          <div class="name">
+            Publisher
+          </div>
+          <span class="value" [textContent]="book?.publisher?.name"></span>
+        </div>
+      </div>
+    </div>
+    <div class="book-description">
+      <h3>Description</h3>
+      <span [textContent]="book?.description"></span>
+    </div>
+    <div class="book-reviews">
+      <h3>Reviews</h3>
+    </div>
+  </div>
+  <div class="order">
+    <span class="book-price" [textContent]="book?.price + ' ₴'"></span>
+    <span class="book-status">{{ book?.status | bookStatusPipe }}</span>
+    <button class="order-button" [disabled]="book?.status === 'SOLD_OUT'">Order now</button>
+  </div>
+</div>
