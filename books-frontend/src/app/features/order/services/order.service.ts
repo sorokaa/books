@@ -12,11 +12,11 @@ export class OrderService {
   constructor(private http: HttpClient) {
   }
 
-  getCurrentUserOrders(): Observable<Order[]> {
+  public getCurrentUserOrders(): Observable<Order[]> {
     return this.http.get<Order[]>(`${this.baseUri}/api/orders/current`)
   }
 
-  createOrder(bookId: number | undefined) {
+  public createOrder(bookId: number) {
     this.http.post(`${this.baseUri}/api/orders/${bookId}/order`, null).subscribe(
       next => next
     )

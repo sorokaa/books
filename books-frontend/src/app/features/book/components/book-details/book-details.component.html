@@ -9,7 +9,7 @@
       <div class="book-characteristics">
         <p class="book-name" [textContent]="book?.name"></p>
         <div class="authors">
-          <span>{{book?.authors | authorsPipe}}</span>
+          <span>{{ book?.authors | authorsPipe }}</span>
         </div>
         <div class="characteristic">
           <div class="name">
@@ -55,8 +55,14 @@
   <div class="order">
     <span class="book-price" [textContent]="book?.price + ' ₴'"></span>
     <span class="book-status">{{ book?.status | bookStatusPipe }}</span>
-    <button class="order-button"
-            [disabled]="book?.status === 'SOLD_OUT'"
-            (click)="createOrder()">Order now</button>
+    <button class="button order-button"
+            *ngIf="!isAdminUser && book"
+            [disabled]="isNotAvailableToOrder()"
+            (click)="createOrder(book.id)">Order now
+    </button>
+    <button class="button delete-button"
+            *ngIf="isAdminUser && book"
+            (click)="deleteBook(book.id)">Delete book
+    </button>
   </div>
 </div>

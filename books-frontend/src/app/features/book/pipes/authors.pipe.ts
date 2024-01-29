@@ -7,7 +7,7 @@ import {Author} from "../models/author.model";
 export class AuthorsPipe implements PipeTransform {
 
   public transform(value: Author[] | undefined): string {
-    if (value === undefined || value.length === 0) {
+    if (!value || value.length === 0) {
       return "Unknown author"
     }
     return "by " + value.map(author => author.name).join(", ")

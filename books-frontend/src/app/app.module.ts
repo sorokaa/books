@@ -9,19 +9,23 @@ import {initializeKeycloak} from "./core/auth/keycloak-init.factory";
 import {BookDetailsModule} from "./features/book/components/book-details/book-details.module";
 import {SharedModule} from "./features/shared/shared.module";
 import {OrderModule} from "./features/order/order.module";
+import {CreateBookModule} from "./features/book/components/create-book/create-book.module";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     KeycloakAngularModule,
     BookListModule,
     BookDetailsModule,
     AppRoutingModule,
     SharedModule,
-    OrderModule
+    OrderModule,
+    CreateBookModule
   ],
   providers: [
     {

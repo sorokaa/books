@@ -12,28 +12,36 @@ import {environments} from "../../../../environments/environments";
 @Injectable()
 export class BookService {
 
-  private baseUri = environments.bookServerUri
+  private baseUrl = environments.bookServerUri
 
   constructor(private http: HttpClient) {
 
   }
 
-  getByFilter(filter: BookFilter, page: number, size: number): Observable<Page<BookShort>> {
+  public getByFilter(filter: BookFilter, page: number, size: number): Observable<Page<BookShort>> {
     return this.http.post<Page<BookShort>>(
-      `${this.baseUri}/api/books/filter?size=${size}&page=${page}`,
+      `${this.baseUrl}/api/books/filter?size=${size}&page=${page}`,
       filter
     )
   }
 
-  getBookById(id: number): Observable<Book> {
-    return this.http.get<Book>(`${this.baseUri}/api/books/${id}`);
+  public getBookById(id: number): Observable<Book> {
+    return this.http.get<Book>(`${this.baseUrl}/api/books/${id}`);
   }
 
-  getAllAuthors(): Observable<Author[]> {
-    return this.http.get<Author[]>(`${this.baseUri}/api/authors`)
+  public getAllAuthors(): Observable<Author[]> {
+    return this.http.get<Author[]>(`${this.baseUrl}/api/authors`)
   }
 
-  getAllPublishers(): Observable<Publisher[]> {
-    return this.http.get<Publisher[]>(`${this.baseUri}/api/publishers`)
+  public getAllPublishers(): Observable<Publisher[]> {
+    return this.http.get<Publisher[]>(`${this.baseUrl}/api/publishers`)
+  }
+
+  public create(value: any): Observable<Book> {
+    return this.http.post<Book>(`${this.baseUrl}/api/books`, value)
+  }
+
+  public deleteBook(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/api/books/${id}`)
   }
 }

@@ -1,0 +1,113 @@
+<form [formGroup]="bookForm" (ngSubmit)="onSubmit()" novalidate>
+  <div class="form-fields">
+    <div class="image-select">
+      <div class="selected-image">
+        <img *ngIf="this.currentImage !== undefined"
+             [src]="getFileUrl(this.currentImage.id)"
+             alt="Error">
+      </div>
+      <div class="upload-container">
+        <div class="upload-button">
+          <div class="input-file-wrapper">
+            <input id="input-file" type="file" (change)="onFileChanged($event)">
+            <label for="input-file" class="input-file-button">
+          <span class="input-file-icon-wrapper">
+            <img src="https://cdn-icons-png.flaticon.com/512/126/126477.png" alt="">
+          </span>
+              <span class="input-file-button-text">Choose book image</span>
+            </label>
+          </div>
+        </div>
+        <div class="file-metadata" *ngIf="currentImage">
+          <p>File metadata</p>
+          <div class="file-metadata-entry">
+            <span class="file-metadata-name">Name: </span>
+            <span>{{ currentImage.name }}</span>
+          </div>
+          <div class="file-metadata-entry">
+            <span class="file-metadata-name">Size: </span>
+            <span>{{ currentImage.size }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-entry">
+      <input id="name" type="text" placeholder="Name" formControlName="name">
+    </div>
+    <div class="form-entry">
+      <input id="year" type="text" placeholder="Year" formControlName="year">
+    </div>
+    <div class="form-entry">
+      <input id="pages" type="text" placeholder="Pages" formControlName="pages">
+    </div>
+    <div class="form-entry">
+      <input id="price" type="text" placeholder="Price" formControlName="price">
+    </div>
+    <div class="form-entry">
+      <label [for]="'status'">Status:</label>
+      <div class="status" *ngFor="let status of availableStatuses">
+        <input type="radio"
+               [id]="status + 'status'"
+               [value]="status"
+               formControlName="status">
+        <label [for]="status">{{status | bookStatusPipe}}</label>
+      </div>
+    </div>
+    <div class="form-entry">
+      <textarea id="description" type="text" placeholder="Description" formControlName="description"></textarea>
+    </div>
+    <div class="form-entry">
+      <label class="input-label" for="publishers-filter">Publishers: </label>
+      <input id="publishers-filter"
+             placeholder="Find publisher"
+             (input)="filterPublishers($event)">
+      <div class="checkbox" *ngFor="let publisher of publishers">
+        <input type="radio"
+               [id]="publisher.id"
+               [value]="publisher.id"
+               formControlName="publisherId">
+        <label [for]="publisher.id" [textContent]="publisher.name"></label>
+      </div>
+    </div>
+    <div class="form-entry">
+      <label class="input-label" for="authors-filter">Authors: </label>
+      <input id="authors-filter"
+             placeholder="Find authors"
+             (input)="filterAuthors($event)">
+      <div class="checkbox" *ngFor="let author of authors">
+        <input type="checkbox"
+               [id]="author.id"
+               [value]="author.id"
+               (change)="onCheckboxChange($event, 'authorIds')">
+        <label [for]="author.id" [textContent]="author.name"></label>
+      </div>
+    </div>
+    <div class="form-entry">
+      <label class="input-label" for="languages-filter">Languages: </label>
+      <input id="languages-filter"
+             placeholder="Find languages"
+             (input)="filterLanguages($event)">
+      <div class="checkbox" *ngFor="let language of languages">
+        <input type="radio"
+               [id]="language.id"
+               [value]="language.id"
+               formControlName="languageId">
+        <label [for]="language.id" [textContent]="language.value"></label>
+      </div>
+    </div>
+    <div class="form-entry">
+      <label class="input-label" for="categories-filter">Categories: </label>
+      <input id="categories-filter"
+             placeholder="Find categories"
+             (input)="filterCategories($event)">
+      <div class="checkbox" *ngFor="let category of categories">
+        <input type="checkbox"
+               [id]="category.id"
+               [value]="category.id"
+               (change)="onCheckboxChange($event, 'categoryIds')">
+        <label [for]="category.id" [textContent]="category.value"></label>
+      </div>
+    </div>
+    <button type="submit">Submit</button>
+  </div>
+</form>

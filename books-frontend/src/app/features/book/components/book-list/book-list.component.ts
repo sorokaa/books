@@ -41,7 +41,6 @@ export class BookListComponent implements OnInit {
 
   loadMore() {
     if (this.books?.last) {
-      console.log("Fuck off")
       return
     }
     this.bookListService.loadMore()

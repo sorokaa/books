@@ -66,7 +66,6 @@ export class BookFilterComponent implements OnInit {
   onCheckboxChange(event: any, controlName: string) {
     const formArray: FormArray = this.filterForm.get(controlName) as FormArray;
     if (event.target.checked) {
-      console.log(event.target.value)
       formArray.push(new FormControl(event.target.value));
     } else {
       let i: number = 0;

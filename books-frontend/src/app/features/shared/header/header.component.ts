@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {KeycloakService} from "keycloak-angular";
+import {AuthGuard} from "../../../core/auth/auth.guard";
 
 @Component({
   selector: "app-header",
@@ -8,12 +8,15 @@ import {KeycloakService} from "keycloak-angular";
 })
 export class HeaderComponent {
 
-  constructor(private keycloakService: KeycloakService) {
+  constructor(private authGuard: AuthGuard) {
+
   }
 
-  onLogout() {
-    this.keycloakService.logout('http://localhost:4200').then(
-      r => this.keycloakService.clearToken()
-    )
+  public onLogout(): void {
+    this.authGuard.logout();
+  }
+
+  public hasRole(role: string): boolean {
+    return this.authGuard.hasRole(role);
   }
 }

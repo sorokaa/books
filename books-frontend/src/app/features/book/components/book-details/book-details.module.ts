@@ -1,10 +1,11 @@
 import {NgModule} from '@angular/core';
 import {BookDetailsComponent} from "./book-details.component";
-import {NgForOf} from "@angular/common";
+import {CommonModule} from "@angular/common";
 import {DictionaryService} from "../../services/dictionary.service";
 import {BookStatusPipe} from "../../pipes/book-status.pipe";
 import {FileService} from "../../services/file.service";
 import {AuthorsPipe} from "../../pipes/authors.pipe";
+import {AuthGuard} from "../../../../core/auth/auth.guard";
 
 @NgModule({
   declarations: [
@@ -13,14 +14,16 @@ import {AuthorsPipe} from "../../pipes/authors.pipe";
     AuthorsPipe
   ],
   imports: [
-    NgForOf
+    CommonModule
   ],
   providers: [
     DictionaryService,
-    FileService
+    FileService,
+    AuthGuard
   ],
   exports: [
-    BookDetailsComponent
+    BookDetailsComponent,
+    BookStatusPipe
   ]
 })
 export class BookDetailsModule {

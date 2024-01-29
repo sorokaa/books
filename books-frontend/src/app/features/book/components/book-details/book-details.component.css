@@ -87,10 +87,8 @@
   font-weight: 500;
 }
 
-.order-button {
+.button {
   align-items: center;
-  background-color: #176B87;
-  box-shadow: 0 0 5px rgba(134, 182, 246, 0.5);
   border: none;
   color: white;
   border-radius: .25rem;
@@ -115,18 +113,36 @@
   height: 50px;
 }
 
-.order-button:hover {
+.button:hover {
   cursor: pointer;
-  background-color: #86B6F6;
-  box-shadow: 0 0 15px rgba(134, 182, 246, 0.5);
   border: none;
   transition: 0.5s;
   transform: translateY(-1px);
 }
 
-.order-button:disabled {
+.button:disabled {
   background: #afafaf;
   color: #696969;
   box-shadow: none;
   transform: none;
+}
+
+.order-button {
+  background-color: #176B87;
+  box-shadow: 0 0 5px rgba(134, 182, 246, 0.5);
+}
+
+.order-button:hover {
+  background-color: #86B6F6;
+  box-shadow: 0 0 15px rgba(134, 182, 246, 0.5);
+}
+
+.delete-button {
+  background-color: #ed5e68;
+  box-shadow: 0 0 15px rgba(237, 94, 104, 0.5);
+}
+
+.delete-button:hover {
+  background-color: #ff7b81;
+  box-shadow: 0 0 20px rgba(237, 94, 104, 0.8);
 }
