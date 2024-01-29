@@ -22,8 +22,6 @@ export class BookFilterComponent implements OnInit {
   languages: Language[] | undefined
   authors: Author[] | undefined
 
-  filteredLanguages: Language[] | undefined;
-  filteredCategories: Category[] | undefined;
   filteredPublishers: Publisher[] | undefined;
   filteredAuthors: Author[] | undefined;
 
@@ -84,22 +82,16 @@ export class BookFilterComponent implements OnInit {
 
   public filterLanguages(event: any): void {
     const value = event.target.value
-    if (value === undefined || value.length === 0) {
-      this.filteredLanguages = this.languages
-    }
-    this.filteredLanguages = this.languages?.filter(language => {
-      return language.value.toLowerCase().includes(value.toLowerCase())
-    })
+    this.dictionaryService.getAllLanguages(value).subscribe(
+      next => this.languages = next
+    )
   }
 
   public filterCategories(event: any): void {
     const value = event.target.value
-    if (value === undefined || value.length === 0) {
-      this.filteredCategories = this.categories
-    }
-    this.filteredCategories = this.categories?.filter(category => {
-      return category.value.toLowerCase().includes(value.toLowerCase())
-    })
+    this.dictionaryService.getAllCategories(value).subscribe(
+      next => this.categories = next
+    )
   }
 
   public filterPublishers(event: any): void {
@@ -133,13 +125,11 @@ export class BookFilterComponent implements OnInit {
       this.publishers = next
       this.filteredPublishers = next
     })
-    this.dictionaryService.getAllLanguages().subscribe(next => {
+    this.dictionaryService.getAllLanguages(null).subscribe(next => {
       this.languages = next
-      this.filteredLanguages = next
     })
-    this.dictionaryService.getAllCategories().subscribe(next => {
+    this.dictionaryService.getAllCategories(null).subscribe(next => {
       this.categories = next
-      this.filteredCategories = next
     })
   }
 }

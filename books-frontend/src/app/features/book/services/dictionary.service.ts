@@ -23,11 +23,19 @@ export class DictionaryService {
     return this.http.get<Category[]>(`${this.baseUri}/api/dictionaries/categories/by-ids?ids=${ids}`)
   }
 
-  getAllLanguages(): Observable<Language[]> {
-    return this.http.get<Language[]>(`${this.baseUri}/api/dictionaries/languages`)
+  getAllLanguages(name: string | null): Observable<Language[]> {
+    let url = `${this.baseUri}/api/dictionaries/languages?limit=5`;
+    if (name !== null) {
+      url += `&name=${name}`
+    }
+    return this.http.get<Language[]>(url)
   }
 
-  getAllCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(`${this.baseUri}/api/dictionaries/categories`)
+  getAllCategories(name: string | null): Observable<Category[]> {
+    let url = `${this.baseUri}/api/dictionaries/categories?limit=5`;
+    if (name !== null) {
+      url += `&name=${name}`
+    }
+    return this.http.get<Category[]>(url)
   }
 }

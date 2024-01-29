@@ -47,7 +47,7 @@
         <input id="category-filter"
                placeholder="Find category"
                (input)="filterCategories($event)">
-        <div class="checkbox" *ngFor="let category of filteredCategories">
+        <div class="checkbox" *ngFor="let category of categories">
           <input type="checkbox"
                  [id]="category.id"
                  [value]="category.id"
@@ -60,7 +60,7 @@
         <input id="language-filter"
                placeholder="Find language"
                (input)="filterLanguages($event)">
-        <div class="checkbox" *ngFor="let language of filteredLanguages">
+        <div class="checkbox" *ngFor="let language of languages">
           <input type="checkbox"
                  [id]="language.id"
                  [value]="language.id"
