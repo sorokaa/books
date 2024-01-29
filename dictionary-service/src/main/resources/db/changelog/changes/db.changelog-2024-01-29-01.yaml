@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2024-01-29-01
+      author: Soroka
+      changes:
+        - loadData:
+            tableName: language
+            file: db/changelog/data/languages-01.csv
+            separator: ;
+        - loadData:
+            tableName: category
+            file: db/changelog/data/categories-01.csv
+            separator: ;

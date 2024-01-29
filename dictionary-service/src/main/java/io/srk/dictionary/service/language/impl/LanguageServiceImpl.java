@@ -1,13 +1,10 @@
 package io.srk.dictionary.service.language.impl;
 
-import io.srk.dictionary.exception.EntityNotFoundException;
-import io.srk.dictionary.model.language.dto.LanguageDto;
-import io.srk.dictionary.model.language.entity.Language;
-import io.srk.dictionary.model.language.mapper.LanguageMapper;
-import io.srk.dictionary.repository.language.LanguageRepository;
+import io.srk.dictionary.model.dictionary.DictionaryDto;
+import io.srk.dictionary.repository.DictionaryRepository;
 import io.srk.dictionary.service.language.LanguageService;
-import io.srk.dictionary.util.EntityConstants;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,28 +13,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LanguageServiceImpl implements LanguageService {
 
-    private final LanguageRepository languageRepository;
-    private final LanguageMapper languageMapper;
+    @Qualifier("languageRepository")
+    private final DictionaryRepository dictionaryRepository;
 
     @Override
-    public List<LanguageDto> getAll() {
-        return languageRepository.findAll().stream()
-                .map(languageMapper::toDto)
-                .toList();
+    public List<DictionaryDto> getAll(String name, Long limit) {
+        return dictionaryRepository.findAll(name, limit);
     }
 
     @Override
-    public LanguageDto getById(Long id) {
-        return languageMapper.toDto(getEntity(id));
+    public DictionaryDto getById(Long id) {
+        return dictionaryRepository.getById(id);
     }
 
     @Override
     public boolean existsById(Long id) {
-        return languageRepository.existsById(id);
-    }
-
-    private Language getEntity(Long id) {
-        return languageRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(EntityConstants.LANGUAGE, id));
+        return dictionaryRepository.existsById(id);
     }
 }

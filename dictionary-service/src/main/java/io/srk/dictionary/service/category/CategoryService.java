@@ -1,17 +1,17 @@
 package io.srk.dictionary.service.category;
 
-import io.srk.dictionary.model.category.dto.CategoryDto;
+import io.srk.dictionary.model.dictionary.DictionaryDto;
 
 import java.util.List;
 import java.util.Set;
 
 public interface CategoryService {
 
-    List<CategoryDto> getAll();
+    List<DictionaryDto> getAll(String name, Long limit);
 
-    CategoryDto getById(Long id);
+    DictionaryDto getById(Long id);
 
     boolean existsById(Long id);
 
-    List<CategoryDto> getByIds(Set<Long> ids);
+    List<DictionaryDto> getByIds(Set<Long> ids);
 }

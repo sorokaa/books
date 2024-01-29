@@ -1,6 +1,6 @@
 package io.srk.dictionary.service.language;
 
-import io.srk.dictionary.model.language.dto.LanguageDto;
+import io.srk.dictionary.model.dictionary.DictionaryDto;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -8,9 +8,9 @@ import java.util.List;
 public interface LanguageService {
 
     @Transactional(readOnly = true)
-    List<LanguageDto> getAll();
+    List<DictionaryDto> getAll(String name, Long limit);
 
-    LanguageDto getById(Long id);
+    DictionaryDto getById(Long id);
 
     boolean existsById(Long id);
 }

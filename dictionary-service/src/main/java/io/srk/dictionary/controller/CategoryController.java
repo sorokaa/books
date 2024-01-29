@@ -1,6 +1,6 @@
 package io.srk.dictionary.controller;
 
-import io.srk.dictionary.model.category.dto.CategoryDto;
+import io.srk.dictionary.model.dictionary.DictionaryDto;
 import io.srk.dictionary.service.category.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,21 +22,24 @@ public class CategoryController {
 
     @Operation(summary = "Get all categories")
     @GetMapping
-    public List<CategoryDto> getAll() {
+    public List<DictionaryDto> getAll(
+            @RequestParam(required = false) Long limit,
+            @RequestParam(required = false) String name
+    ) {
         log.debug("API request to get all categories");
-        return categoryService.getAll();
+        return categoryService.getAll(name, limit);
     }
 
     @Operation(summary = "Get category by id")
     @GetMapping("/{id}")
-    public CategoryDto getById(@PathVariable Long id) {
+    public DictionaryDto getById(@PathVariable Long id) {
         log.debug("API request to get category by id {}", id);
         return categoryService.getById(id);
     }
 
     @Operation(summary = "Get categories by ids")
     @GetMapping("/by-ids")
-    public List<CategoryDto> getById(@RequestParam Set<Long> ids) {
+    public List<DictionaryDto> getById(@RequestParam Set<Long> ids) {
         log.debug("API request to get categories by ids {}", ids);
         return categoryService.getByIds(ids);
     }

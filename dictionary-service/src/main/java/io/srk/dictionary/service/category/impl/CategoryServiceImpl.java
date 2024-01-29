@@ -1,13 +1,10 @@
 package io.srk.dictionary.service.category.impl;
 
-import io.srk.dictionary.exception.EntityNotFoundException;
-import io.srk.dictionary.model.category.dto.CategoryDto;
-import io.srk.dictionary.model.category.entity.Category;
-import io.srk.dictionary.model.category.mapper.CategoryMapper;
-import io.srk.dictionary.repository.category.CategoryRepository;
+import io.srk.dictionary.model.dictionary.DictionaryDto;
+import io.srk.dictionary.repository.DictionaryRepository;
 import io.srk.dictionary.service.category.CategoryService;
-import io.srk.dictionary.util.EntityConstants;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,35 +14,25 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 
-    private final CategoryRepository categoryRepository;
-    private final CategoryMapper categoryMapper;
-
+    @Qualifier("categoryRepository")
+    private final DictionaryRepository dictionaryRepository;
     @Override
-    public List<CategoryDto> getAll() {
-        return categoryRepository.findAll().stream()
-                .map(categoryMapper::toDto)
-                .toList();
+    public List<DictionaryDto> getAll(String name, Long limit) {
+        return dictionaryRepository.findAll(name, limit);
     }
 
     @Override
-    public CategoryDto getById(Long id) {
-        return categoryMapper.toDto(getEntity(id));
+    public DictionaryDto getById(Long id) {
+        return dictionaryRepository.getById(id);
     }
 
     @Override
     public boolean existsById(Long id) {
-        return categoryRepository.existsById(id);
+        return dictionaryRepository.existsById(id);
     }
 
     @Override
-    public List<CategoryDto> getByIds(Set<Long> ids) {
-        return categoryRepository.findAllById(ids).stream()
-                .map(categoryMapper::toDto)
-                .toList();
-    }
-
-    private Category getEntity(Long id) {
-        return categoryRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(EntityConstants.CATEGORY, id));
+    public List<DictionaryDto> getByIds(Set<Long> ids) {
+        return dictionaryRepository.getByIds(ids);
     }
 }
