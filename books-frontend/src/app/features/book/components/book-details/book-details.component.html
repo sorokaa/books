@@ -9,7 +9,7 @@
       <div class="book-characteristics">
         <p class="book-name" [textContent]="book?.name"></p>
         <div class="authors">
-          by <span class="authors" [textContent]="author.name" *ngFor="let author of book?.authors"></span>
+          <span>{{book?.authors | authorsPipe}}</span>
         </div>
         <div class="characteristic">
           <div class="name">
@@ -55,6 +55,8 @@
   <div class="order">
     <span class="book-price" [textContent]="book?.price + ' ₴'"></span>
     <span class="book-status">{{ book?.status | bookStatusPipe }}</span>
-    <button class="order-button" [disabled]="book?.status === 'SOLD_OUT'">Order now</button>
+    <button class="order-button"
+            [disabled]="book?.status === 'SOLD_OUT'"
+            (click)="createOrder()">Order now</button>
   </div>
 </div>

@@ -5,8 +5,9 @@
          [alt]="book?.name"/>
   </div>
   <span class="book-name" [textContent]="book?.name" [routerLink]="'/books/' + book?.id"></span>
+  <span class="book-first-author"
+        [textContent]="book?.authorsNames?.at(0)"></span>
   <div class="book-details">
     <span class="book-price" [textContent]="book?.price + ' ₴'"></span>
-    <input class="order-button" type="button" value="Order">
   </div>
 </div>

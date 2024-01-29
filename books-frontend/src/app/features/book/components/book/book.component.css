@@ -26,7 +26,12 @@
   margin-top: 10px;
   font-size: 18px;
   cursor: pointer;
-  padding: 0 5px;
+  padding: 0 10px;
+}
+
+.book-first-author {
+  font-size: 12px;
+  padding: 0 10px;
 }
 
 .book-details {
@@ -35,7 +40,7 @@
   justify-content: space-between;
   gap: 5px;
   align-items: center;
-  padding: 30px 5px 10px 5px;
+  padding: 20px 10px 20px 10px;
 }
 
 .book-price {

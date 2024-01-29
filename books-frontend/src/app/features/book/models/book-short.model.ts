@@ -4,4 +4,5 @@ export interface BookShort {
   price: number,
   status: string,
   pictureId: number
+  authorsNames: string[]
 }

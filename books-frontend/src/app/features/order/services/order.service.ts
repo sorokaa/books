@@ -15,4 +15,10 @@ export class OrderService {
   getCurrentUserOrders(): Observable<Order[]> {
     return this.http.get<Order[]>(`${this.baseUri}/api/orders/current`)
   }
+
+  createOrder(bookId: number | undefined) {
+    this.http.post(`${this.baseUri}/api/orders/${bookId}/order`, null).subscribe(
+      next => next
+    )
+  }
 }

@@ -18,6 +18,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,6 +38,7 @@ public interface BookMapper {
     @Mapping(target = "publisher", qualifiedBy = ShortPublisherInfo.class)
     BookDto toDto(Book book);
 
+    @Mapping(target = "authorsNames", expression = "java(getAuthorsNames(book.getAuthors()))")
     BookShortDto toShortDto(Book book);
 
     Book toEntity(CreateBookRequest request);
@@ -44,15 +46,24 @@ public interface BookMapper {
     Book update(@MappingTarget Book toUpdate, UpdateBookRequest request);
 
     @Mapping(target = "bookName", source = "name")
-    @Mapping(target = "authorName", expression = "java(getAuthorsNames(book.getAuthors()))")
+    @Mapping(target = "authorName", expression = "java(getAuthorsNamesConcat(book.getAuthors()))")
     BookStatisticDto toStatisticDto(Book book);
 
-    default String getAuthorsNames(List<Author> authors) {
+    default String getAuthorsNamesConcat(List<Author> authors) {
         if (CollectionUtils.isEmpty(authors)) {
             return StringUtils.EMPTY;
         }
         return authors.stream()
                 .map(Author::getName)
                 .collect(Collectors.joining(", "));
+    }
+
+    default List<String> getAuthorsNames(List<Author> authors) {
+        if (CollectionUtils.isEmpty(authors)) {
+            return new ArrayList<>();
+        }
+        return authors.stream()
+                .map(Author::getName)
+                .toList();
     }
 }

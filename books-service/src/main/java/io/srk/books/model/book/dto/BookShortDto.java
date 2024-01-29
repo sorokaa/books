@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -27,4 +27,6 @@ public class BookShortDto {
     @Schema(description = "Book picture id")
     private Long pictureId;
 
+    @Schema(description = "Books authors")
+    private List<String> authorsNames = new ArrayList<>();
 }

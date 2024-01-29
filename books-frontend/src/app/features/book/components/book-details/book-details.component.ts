@@ -6,6 +6,7 @@ import {Category} from "../../models/category.model";
 import {Language} from "../../models/language.model";
 import {DictionaryService} from "../../services/dictionary.service";
 import {FileService} from "../../services/file.service";
+import {OrderService} from "../../../order/services/order.service";
 
 @Component({
   selector: 'book-details',
@@ -21,10 +22,19 @@ export class BookDetailsComponent {
   constructor(private bookService: BookService,
               private route: ActivatedRoute,
               private dictionaryService: DictionaryService,
-              private fileService: FileService) {
+              private fileService: FileService,
+              private orderService: OrderService) {
     this.route.params.subscribe(
       params => this.initBook(params['id'])
     )
+  }
+
+  public getFileUrl(): string {
+    return this.fileService.getFileUrl(this.book?.pictureId)
+  }
+
+  public createOrder(): void {
+    this.orderService.createOrder(this.book?.id)
   }
 
   private initBook(id: number): void {
@@ -43,9 +53,5 @@ export class BookDetailsComponent {
     this.dictionaryService.getCategoriesByIds(book.categoryIds).subscribe(
       next => this.categories = next
     )
-  }
-
-  getFileUrl() {
-    return this.fileService.getFileUrl(this.book?.pictureId)
   }
 }
